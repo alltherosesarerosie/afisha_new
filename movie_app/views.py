@@ -61,3 +61,15 @@ def review_detail_view(request, id):
         return Response(status=status.HTTP_404_NOT_FOUND, data={'message': "Review not found"})
     data = ReviewSerializer(review).data
     return Response(data=data)
+
+@api_view(['GET'])
+def movie_review_list_view(request):
+    movies = Movie.objects.all()
+    data = MovieSerializer(movies, many=True).data
+    return Response(data)
+
+@api_view(['GET'])
+def director_list_view(request):
+    directors = Director.objects.all()
+    data = DirectorSerializer(directors, many=True).data
+    return Response(data)
